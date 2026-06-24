@@ -40,22 +40,22 @@ export default function App(){
   const desc=sel?TD[sel]:null;
 
   return(
-    <div style={{background:"#0f1117",color:"#e2e4ea",fontFamily:"Inter,sans-serif",height:"100vh",display:"flex",flexDirection:"column",fontSize:12}}>
+    <div style={{background:"#ffffff",color:"#1a1a1a",fontFamily:"Inter,sans-serif",height:"100vh",display:"flex",flexDirection:"column",fontSize:17}}>
       {/* Header */}
-      <div style={{padding:"8px 14px",borderBottom:"1px solid #2e3343",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:6}}>
-        <div style={{fontSize:14,fontWeight:600}}><span style={{color:"#6366f1"}}>BCELOne</span> ER Diagram — Relations + Schema + Description + Sample Data</div>
-        <div style={{display:"flex",gap:10,fontSize:9,color:"#9499ab",alignItems:"center"}}>
+      <div style={{padding:"8px 14px",borderBottom:"1px solid #d0d4e0",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:6}}>
+        <div style={{fontSize:20,fontWeight:600}}><span style={{color:"#6366f1"}}>BCELOne</span> ER Diagram — Relations + Schema + Description + Sample Data</div>
+        <div style={{display:"flex",gap:10,fontSize:13,color:"#9499ab",alignItems:"center"}}>
           {[["#3b82f6","Fact"],["#8b5cf6","Dim"],["#f59e0b","Bridge"],["#10b981","Agg"]].map(([c,l])=>
             <span key={l} style={{display:"flex",alignItems:"center",gap:2}}><span style={{width:7,height:7,borderRadius:2,background:c,display:"inline-block"}}/>{l}</span>)}
           <span style={{color:"#e2e4ea"}}>{Object.keys(Z).length} tables · {colCount} cols · {edges.length} rels</span>
         </div>
       </div>
       {/* Zoom bar */}
-      <div style={{padding:"4px 14px",borderBottom:"1px solid #2e3343",display:"flex",gap:8,alignItems:"center",fontSize:9,color:"#9499ab"}}>
+      <div style={{padding:"4px 14px",borderBottom:"1px solid #d0d4e0",display:"flex",gap:8,alignItems:"center",fontSize:13,color:"#9499ab"}}>
         <span>Zoom</span>
         <input type="range" min={25} max={120} value={Math.round(zoom*100)} onChange={e=>setZoom(e.target.value/100)} style={{width:100}}/>
         <span>{Math.round(zoom*100)}%</span>
-        {sel&&<><span style={{marginLeft:12}}>Selected: <b style={{color:"#6366f1"}}>{sel}</b></span><button onClick={()=>{setSel(null);setTab("schema")}} style={{background:"#2e3343",border:"none",color:"#9499ab",borderRadius:3,padding:"1px 8px",cursor:"pointer",fontSize:9}}>Clear</button></>}
+        {sel&&<><span style={{marginLeft:12}}>Selected: <b style={{color:"#6366f1"}}>{sel}</b></span><button onClick={()=>{setSel(null);setTab("schema")}} style={{background:"#d0d4e0",border:"none",color:"#9499ab",borderRadius:3,padding:"1px 8px",cursor:"pointer",fontSize:13}}>Clear</button></>}
       </div>
       {/* Main */}
       <div style={{flex:1,display:"grid",gridTemplateColumns:sel?"1fr 320px":"1fr",overflow:"hidden"}}>
@@ -72,58 +72,58 @@ export default function App(){
             </svg>
             {Object.entries(Z).map(([name,tbl])=>{const pos=L[name];if(!pos)return null;const h=HH+tbl.c.length*RH;const isSel=sel===name;const isHov=hov===name;const isHl=isSel||isHov;const dim=active&&!connected.has(name);
               return(<div key={name} onClick={()=>{setSel(sel===name?null:name);setTab("schema")}} onMouseEnter={()=>setHov(name)} onMouseLeave={()=>setHov(null)}
-                style={{position:"absolute",left:pos[0],top:pos[1],width:W,background:isHl?"#1e2130":"#14161f",border:"1px solid "+(isHl?"#6366f1":C[tbl.t]),borderRadius:5,overflow:"hidden",cursor:"pointer",opacity:dim?0.15:1,transition:"opacity 0.15s",boxShadow:isHl?"0 0 10px "+C[tbl.t]+"40":"none",zIndex:isHl?10:1}}>
+                style={{position:"absolute",left:pos[0],top:pos[1],width:W,background:isHl?"#eef0ff":"#ffffff",border:"1px solid "+(isHl?"#6366f1":C[tbl.t]),borderRadius:5,overflow:"hidden",cursor:"pointer",opacity:dim?0.15:1,transition:"opacity 0.15s",boxShadow:isHl?"0 0 10px "+C[tbl.t]+"40":"none",zIndex:isHl?10:1}}>
                 <div style={{padding:"2px 5px",background:C[tbl.t]+"0f",borderBottom:"1px solid "+C[tbl.t]+"30",display:"flex",alignItems:"center",gap:3}}>
-                  <span style={{fontSize:6,fontWeight:700,padding:"1px 3px",borderRadius:2,background:C[tbl.t]+"22",color:C[tbl.t],textTransform:"uppercase"}}>{tbl.t}</span>
-                  <span style={{fontSize:8,fontWeight:600,fontFamily:"JetBrains Mono,monospace",color:isHl?"#e2e4ea":"#b0b3bf"}}>{name}</span>
+                  <span style={{fontSize:8,fontWeight:700,padding:"1px 3px",borderRadius:2,background:C[tbl.t]+"22",color:C[tbl.t],textTransform:"uppercase"}}>{tbl.t}</span>
+                  <span style={{fontSize:11,fontWeight:600,fontFamily:"JetBrains Mono,monospace",color:isHl?"#e2e4ea":"#b0b3bf"}}>{name}</span>
                 </div>
-                <div style={{padding:"1px 0"}}>{tbl.c.map((col,j)=>(<div key={j} style={{display:"grid",gridTemplateColumns:"16px 1fr 38px",padding:"0 4px",fontSize:7,alignItems:"center",height:RH}}>
-                  <span style={{fontSize:6,fontWeight:700,color:col.k==="PK"?"#f59e0b":col.k==="FK"?"#ec4899":"transparent"}}>{col.k||""}</span>
-                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:7,color:col.k==="FK"?"#ec489977":"#8a8fa0"}}>{col.n}</span>
-                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:5,color:"#444",textAlign:"right"}}>{col.y}</span>
+                <div style={{padding:"1px 0"}}>{tbl.c.map((col,j)=>(<div key={j} style={{display:"grid",gridTemplateColumns:"16px 1fr 38px",padding:"0 4px",fontSize:10,alignItems:"center",height:RH}}>
+                  <span style={{fontSize:8,fontWeight:700,color:col.k==="PK"?"#f59e0b":col.k==="FK"?"#ec4899":"transparent"}}>{col.k||""}</span>
+                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:10,color:col.k==="FK"?"#ec489977":"#8a8fa0"}}>{col.n}</span>
+                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:7,color:"#444",textAlign:"right"}}>{col.y}</span>
                 </div>))}</div>
               </div>)})}
           </div>
         </div>
         {/* Detail panel */}
         {sel&&t&&(
-          <div style={{borderLeft:"1px solid #2e3343",background:"#1a1d27",overflowY:"auto",padding:12}}>
-            <h2 style={{fontSize:13,fontWeight:600,fontFamily:"JetBrains Mono,monospace",color:"#6366f1",margin:0}}>{sel}</h2>
-            <div style={{fontSize:9,color:"#9499ab",marginBottom:8}}>{t.d}</div>
+          <div style={{borderLeft:"1px solid #e0e4ef",background:"#f5f6fa",overflowY:"auto",padding:12}}>
+            <h2 style={{fontSize:18,fontWeight:600,fontFamily:"JetBrains Mono,monospace",color:"#6366f1",margin:0}}>{sel}</h2>
+            <div style={{fontSize:13,color:"#9499ab",marginBottom:8}}>{t.d}</div>
             {/* Tabs */}
-            <div style={{display:"flex",borderBottom:"1px solid #2e3343",marginBottom:8}}>
+            <div style={{display:"flex",borderBottom:"1px solid #d0d4e0",marginBottom:8}}>
               {[["schema","Schema"],["desc","Description"],["data","Sample Data"]].map(([id,label])=>(
-                <button key={id} onClick={()=>setTab(id)} style={{padding:"5px 10px",fontSize:10,cursor:"pointer",color:tab===id?"#6366f1":"#9499ab",border:"none",borderBottom:tab===id?"2px solid #6366f1":"2px solid transparent",background:"none",fontFamily:"inherit",fontWeight:tab===id?500:400}}>{label}</button>
+                <button key={id} onClick={()=>setTab(id)} style={{padding:"5px 10px",fontSize:14,cursor:"pointer",color:tab===id?"#6366f1":"#9499ab",border:"none",borderBottom:tab===id?"2px solid #6366f1":"2px solid transparent",background:"none",fontFamily:"inherit",fontWeight:tab===id?500:400}}>{label}</button>
               ))}
             </div>
             {/* Schema tab */}
             {tab==="schema"&&(<div>
-              {t.g&&<div style={{marginBottom:8}}><div style={{fontSize:8,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Grain</div><div style={{fontSize:10,padding:"3px 6px",background:"#232733",borderRadius:3}}>{t.g}</div></div>}
-              {t.f&&t.f.length>0&&<div style={{marginBottom:8}}><div style={{fontSize:8,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Features ({t.f.length})</div><div style={{display:"flex",flexWrap:"wrap",gap:2}}>{t.f.map((f,i)=><span key={i} style={{fontSize:7,padding:"1px 4px",borderRadius:2,background:"#232733",color:"#9499ab"}}>{f}</span>)}</div></div>}
-              <div style={{marginBottom:8}}><div style={{fontSize:8,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Columns ({t.c.length})</div>
-                {t.c.map((col,i)=>(<div key={i} style={{display:"grid",gridTemplateColumns:"20px 1fr 50px",padding:"2px 4px",fontSize:9,borderRadius:2,background:i%2?"transparent":"#232733"}}>
-                  <span style={{fontSize:7,fontWeight:700,color:col.k==="PK"?"#f59e0b":col.k==="FK"?"#ec4899":"transparent"}}>{col.k}</span>
-                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:9}}>{col.n}</span>
-                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:8,color:"#666",textAlign:"right"}}>{col.y}</span>
+              {t.g&&<div style={{marginBottom:8}}><div style={{fontSize:11,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Grain</div><div style={{fontSize:14,padding:"3px 6px",background:"#eef0f5",borderRadius:3}}>{t.g}</div></div>}
+              {t.f&&t.f.length>0&&<div style={{marginBottom:8}}><div style={{fontSize:11,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Features ({t.f.length})</div><div style={{display:"flex",flexWrap:"wrap",gap:2}}>{t.f.map((f,i)=><span key={i} style={{fontSize:10,padding:"1px 4px",borderRadius:2,background:"#eef0f5",color:"#9499ab"}}>{f}</span>)}</div></div>}
+              <div style={{marginBottom:8}}><div style={{fontSize:11,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Columns ({t.c.length})</div>
+                {t.c.map((col,i)=>(<div key={i} style={{display:"grid",gridTemplateColumns:"20px 1fr 50px",padding:"2px 4px",fontSize:13,borderRadius:2,background:i%2?"#ffffff":"#f0f2f8"}}>
+                  <span style={{fontSize:10,fontWeight:700,color:col.k==="PK"?"#f59e0b":col.k==="FK"?"#ec4899":"transparent"}}>{col.k}</span>
+                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:13}}>{col.n}</span>
+                  <span style={{fontFamily:"JetBrains Mono,monospace",fontSize:11,color:"#666",textAlign:"right"}}>{col.y}</span>
                 </div>))}
               </div>
-              {rels.length>0&&<div style={{marginBottom:8}}><div style={{fontSize:8,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>References ({rels.length})</div>
-                {rels.map((r,i)=>(<div key={i} onClick={()=>{setSel(r.r);setTab("schema")}} style={{padding:"3px 5px",borderRadius:3,background:"#232733",marginBottom:2,fontSize:9,cursor:"pointer"}}>{r.n} <span style={{color:"#ec4899"}}>→</span> <span style={{color:"#6366f1",fontWeight:500}}>{r.r}</span></div>))}
+              {rels.length>0&&<div style={{marginBottom:8}}><div style={{fontSize:11,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>References ({rels.length})</div>
+                {rels.map((r,i)=>(<div key={i} onClick={()=>{setSel(r.r);setTab("schema")}} style={{padding:"3px 5px",borderRadius:3,background:"#eef0f5",marginBottom:2,fontSize:13,cursor:"pointer"}}>{r.n} <span style={{color:"#ec4899"}}>→</span> <span style={{color:"#6366f1",fontWeight:500}}>{r.r}</span></div>))}
               </div>}
-              {refBy.length>0&&<div><div style={{fontSize:8,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Referenced by ({refBy.length})</div>
-                {refBy.map((r,i)=>(<div key={i} onClick={()=>{setSel(r.t);setTab("schema")}} style={{padding:"3px 5px",borderRadius:3,background:"#232733",marginBottom:2,fontSize:9,cursor:"pointer"}}><span style={{color:"#6366f1",fontWeight:500}}>{r.t}</span> <span style={{color:"#ec4899"}}>←</span> {r.c}</div>))}
+              {refBy.length>0&&<div><div style={{fontSize:11,fontWeight:600,textTransform:"uppercase",color:"#9499ab",letterSpacing:.5,marginBottom:3}}>Referenced by ({refBy.length})</div>
+                {refBy.map((r,i)=>(<div key={i} onClick={()=>{setSel(r.t);setTab("schema")}} style={{padding:"3px 5px",borderRadius:3,background:"#eef0f5",marginBottom:2,fontSize:13,cursor:"pointer"}}><span style={{color:"#6366f1",fontWeight:500}}>{r.t}</span> <span style={{color:"#ec4899"}}>←</span> {r.c}</div>))}
               </div>}
             </div>)}
             {/* Description tab */}
-            {tab==="desc"&&(<div style={{fontSize:11,lineHeight:1.8,color:"#9499ab"}}>{desc||"No description."}</div>)}
+            {tab==="desc"&&(<div style={{fontSize:15,lineHeight:1.8,color:"#9499ab"}}>{desc||"No description."}</div>)}
             {/* Sample Data tab */}
             {tab==="data"&&(<div>
               {data&&data.length>0?(<>
-                <div style={{fontSize:9,color:"#9499ab",marginBottom:4}}>{data.length} rows of Lao banking sample data</div>
-                <div style={{overflowX:"auto",maxHeight:400,overflowY:"auto",border:"1px solid #2e3343",borderRadius:3}}>
-                  <table style={{width:"100%",borderCollapse:"collapse",fontSize:8,fontFamily:"JetBrains Mono,monospace"}}>
-                    <thead><tr>{Object.keys(data[0]).map(k=><th key={k} style={{position:"sticky",top:0,zIndex:1,background:"#232733",padding:"4px 5px",textAlign:"left",color:"#6366f1",fontWeight:500,borderBottom:"1px solid #2e3343",whiteSpace:"nowrap"}}>{k}</th>)}</tr></thead>
-                    <tbody>{data.map((row,ri)=><tr key={ri}>{Object.entries(row).map(([k,v],ci)=>{const cd=t.c.find(c=>c.n===k);return <td key={ci} style={{padding:"2px 5px",borderBottom:"1px solid #1e2130",whiteSpace:"nowrap",color:cd&&cd.k==="PK"?"#f59e0b":cd&&cd.k==="FK"?"#ec4899":"#9499ab"}}>{v===null?"NULL":String(v)}</td>})}</tr>)}</tbody>
+                <div style={{fontSize:13,color:"#9499ab",marginBottom:4}}>{data.length} rows of Lao banking sample data</div>
+                <div style={{overflowX:"auto",maxHeight:400,overflowY:"auto",border:"1px solid #d0d4e0",borderRadius:3}}>
+                  <table style={{width:"100%",borderCollapse:"collapse",fontSize:11,fontFamily:"JetBrains Mono,monospace"}}>
+                    <thead><tr>{Object.keys(data[0]).map(k=><th key={k} style={{position:"sticky",top:0,zIndex:1,background:"#eef0f5",padding:"4px 5px",textAlign:"left",color:"#6366f1",fontWeight:500,borderBottom:"1px solid #d0d4e0",whiteSpace:"nowrap"}}>{k}</th>)}</tr></thead>
+                    <tbody>{data.map((row,ri)=><tr key={ri}>{Object.entries(row).map(([k,v],ci)=>{const cd=t.c.find(c=>c.n===k);return <td key={ci} style={{padding:"2px 5px",borderBottom:"1px solid #e0e4ef",whiteSpace:"nowrap",color:cd&&cd.k==="PK"?"#f59e0b":cd&&cd.k==="FK"?"#ec4899":"#9499ab"}}>{v===null?"NULL":String(v)}</td>})}</tr>)}</tbody>
                   </table>
                 </div>
               </>):(<div style={{padding:12,textAlign:"center",color:"#666"}}>No sample data</div>)}
